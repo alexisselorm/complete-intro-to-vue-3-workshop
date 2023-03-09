@@ -23,6 +23,9 @@
       </p>
       {{ averageHeight }} is the average Height
       <p>{{ averageAge }} is the average</p>
+      <ul>
+        <li v-for="(bender,element) in benders">{{ element }} {{ bender }}</li>
+      </ul>
       Age
       <div>
         <ul v-if="favourites.length">
@@ -47,7 +50,7 @@
               name: "Aang",
               age: 150,
               height: 120,
-              elements: ["Fire", "Air", "Water", "Air"],
+              elements: ["Fire", "Air", "Water", "Earth"],
             },
             {
               name: "Zuko",
@@ -86,6 +89,24 @@
               this.characterList.reduce((acc, person) => acc + person.age, 0) /
               this.characterList.length
             );
+          },
+          benders() {
+            const elements = ["Fire", "Air", "Water", "Earth"];
+            const stats = {
+              Air: 0,
+              Water: 0,
+              Earth: 0,
+              Fire: 0,
+            };
+
+            this.characterList.forEach((character) => {
+              elements.forEach((element) => {
+                if (character.elements.includes(element)) {
+                  stats[element] += 1;
+                }
+              });
+            });
+            return stats;
           },
         },
         methods: {
