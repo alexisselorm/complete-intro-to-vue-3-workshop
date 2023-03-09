@@ -21,7 +21,9 @@
           }}
         </span>
       </p>
-
+      {{ averageHeight }} is the average Height
+      <p>{{ averageAge }} is the average</p>
+      Age
       <div>
         <ul v-if="favourites.length">
           <h2>Favourites</h2>
@@ -43,15 +45,23 @@
           characterList: [
             {
               name: "Aang",
+              age: 150,
+              height: 120,
             },
             {
               name: "Zuko",
+              age: 21,
+              height: 109,
             },
             {
               name: "Toph",
+              age: 11,
+              height: 135,
             },
             {
               name: "Katara",
+              age: 19,
+              height: 137,
             },
           ],
           favourites: [],
@@ -59,6 +69,20 @@
             name: "",
           },
         }),
+        computed: {
+          averageHeight() {
+            return (
+              this.characterList.reduce((acc, per) => acc + per.height, 0) /
+              this.characterList.length
+            );
+          },
+          averageAge() {
+            return (
+              this.characterList.reduce((acc, person) => acc + person.age, 0) /
+              this.characterList.length
+            );
+          },
+        },
         methods: {
           addToFavorites(character) {
             this.favourites.push(character);
