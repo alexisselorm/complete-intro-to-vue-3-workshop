@@ -1,7 +1,6 @@
 <template>
     <li>
         <p>{{ character.name }}</p>
-
     </li>
 </template>
 

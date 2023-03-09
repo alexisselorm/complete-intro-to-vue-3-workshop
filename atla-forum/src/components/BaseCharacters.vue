@@ -1,18 +1,20 @@
 <template>
     <character-list title="All Characters" :character-list="characterList" @addToFavourite="addToFavorites" />
-    {{ averageHeight }} is the average Height
-    <p>{{ averageAge }} is the average</p>
+    <!-- {{ averageHeight }} is the average Height
+    <p>{{ averageAge }} is the average</p> -->
 
-    <ul>
+    <character-create @addnewchar="addnewchar" />
+    <!-- <ul>
         <li v-for="(bender, element) in benders" :key="`element-${bender}`">{{ element }} {{ bender }}</li>
-    </ul>
+    </ul> -->
 
     <character-list title="Favourites" :character-list="favourites" />
 </template>
 <script>
 import CharacterList from './CharacterList.vue';
+import CharacterCreate from './CharacterCreate.vue';
 export default {
-    components: { CharacterList },
+    components: { CharacterList, CharacterCreate },
     data() {
         return {
             characterList: [
@@ -42,10 +44,6 @@ export default {
                 },
             ],
             favourites: [],
-            newChar: {
-                name: "",
-                elements: [],
-            },
         }
     },
     methods: {
@@ -55,45 +53,43 @@ export default {
         removeFromFavourite(index) {
             this.favourites.splice(index, 1);
         },
-        addnewchar() {
-            this.characterList.push(this.newChar);
-            this.newChar = {
-                name: "",
-            };
+        addnewchar(name) {
+            console.log(name);
+            this.characterList.push(name);
         },
     },
     computed: {
 
-        averageHeight() {
-            return (
-                this.characterList.reduce((acc, per) => acc + per.height, 0) /
-                this.characterList.length
-            );
-        },
-        averageAge() {
-            return (
-                this.characterList.reduce((acc, person) => acc + person.age, 0) /
-                this.characterList.length
-            );
-        },
-        benders() {
-            const elements = ["Fire", "Air", "Water", "Earth"];
-            const stats = {
-                Air: 0,
-                Water: 0,
-                Earth: 0,
-                Fire: 0,
-            };
+        // averageHeight() {
+        //     return (
+        //         this.characterList.reduce((acc, per) => acc + per.height, 0) /
+        //         this.characterList.length
+        //     );
+        // },
+        // averageAge() {
+        //     return (
+        //         this.characterList.reduce((acc, person) => acc + person.age, 0) /
+        //         this.characterList.length
+        //     );
+        // },
+        // benders() {
+        //     const elements = ["Fire", "Air", "Water", "Earth"];
+        //     const stats = {
+        //         Air: 0,
+        //         Water: 0,
+        //         Earth: 0,
+        //         Fire: 0,
+        //     };
 
-            this.characterList.forEach((character) => {
-                elements.forEach((element) => {
-                    if (character.elements.includes(element)) {
-                        stats[element] += 1;
-                    }
-                });
-            });
-            return stats;
-        },
+        //     this.characterList.forEach((character) => {
+        //         elements.forEach((element) => {
+        //             if (character.elements.includes(element)) {
+        //                 stats[element] += 1;
+        //             }
+        //         });
+        //     });
+        //     return stats;
+        // },
 
     },
 }
