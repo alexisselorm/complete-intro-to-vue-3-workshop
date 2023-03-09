@@ -33,10 +33,7 @@
         <p v-else>No favourites yet</p>
       </div>
 
-      <form @submit.prevent="addnewchar">
-        <input type="text" v-model="newChar.name" />
-        <button type="submit">Add new Character</button>
-      </form>
+      <input type="text" v-model="newChar.name" @keyup.enter="addnewchar" />
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -71,6 +68,9 @@
           },
           addnewchar() {
             this.characterList.push(this.newChar);
+            this.newChar = {
+              name: "",
+            };
           },
         },
       }).mount("#app");
