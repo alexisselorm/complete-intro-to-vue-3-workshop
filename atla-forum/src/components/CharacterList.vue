@@ -4,7 +4,8 @@
     <ul v-else>
         <div v-for="character in characterList" :key="character.name">
             <base-character :character="character" />
-            <button type="submit" @click="$emit('addToFavourite', character)">Favourite</button>
+            <BaseButton text="Hi" icon="siuu" type="submit" @click="$emit('addToFavourite', character)">Arrow Left Hi
+            </BaseButton>
         </div>
 
 
@@ -13,10 +14,11 @@
 
 <script>
 import BaseCharacter from './BaseCharacter.vue';
-
+import BaseButton from './BaseButton.vue';
 export default {
     components: {
-        BaseCharacter
+        BaseCharacter,
+        BaseButton
     },
     emits: ['addToFavourite'],
     props: {
