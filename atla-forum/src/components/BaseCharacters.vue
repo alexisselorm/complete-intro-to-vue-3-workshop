@@ -60,36 +60,36 @@ export default {
     },
     computed: {
 
-        // averageHeight() {
-        //     return (
-        //         this.characterList.reduce((acc, per) => acc + per.height, 0) /
-        //         this.characterList.length
-        //     );
-        // },
-        // averageAge() {
-        //     return (
-        //         this.characterList.reduce((acc, person) => acc + person.age, 0) /
-        //         this.characterList.length
-        //     );
-        // },
-        // benders() {
-        //     const elements = ["Fire", "Air", "Water", "Earth"];
-        //     const stats = {
-        //         Air: 0,
-        //         Water: 0,
-        //         Earth: 0,
-        //         Fire: 0,
-        //     };
+        averageHeight() {
+            return (
+                this.characterList.reduce((acc, per) => acc + per.height, 0) /
+                this.characterList.length
+            );
+        },
+        averageAge() {
+            return (
+                this.characterList.reduce((acc, person) => acc + person.age, 0) /
+                this.characterList.length
+            );
+        },
+        benders() {
+            const elements = ["Fire", "Air", "Water", "Earth"];
+            const stats = {
+                Air: 0,
+                Water: 0,
+                Earth: 0,
+                Fire: 0,
+            };
 
-        //     this.characterList.forEach((character) => {
-        //         elements.forEach((element) => {
-        //             if (character.elements.includes(element)) {
-        //                 stats[element] += 1;
-        //             }
-        //         });
-        //     });
-        //     return stats;
-        // },
+            this.characterList.forEach((character) => {
+                elements.forEach((element) => {
+                    if (character.elements.includes(element)) {
+                        stats[element] += 1;
+                    }
+                });
+            });
+            return stats;
+        },
 
     },
 }

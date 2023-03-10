@@ -18,6 +18,7 @@ export default {
     components: {
         BaseCharacter
     },
+    emits: ['addToFavourite'],
     props: {
         characterList: {
             type: Array
