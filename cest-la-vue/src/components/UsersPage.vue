@@ -5,19 +5,26 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
 export default {
-  data: () => ({
-    users: [],
-  }),
-  methods: {
-    async fetchUsers() {
-      this.users = await fetch(
+  setup() {
+    let users = ref([]);
+    const fetchUsers = async () => {
+      users.value = await fetch(
         "https://jsonplaceholder.typicode.com/users"
       ).then((response) => response.json());
-    },
-  },
-  created() {
-    this.fetchUsers();
+    };
+
+    onMounted(() => {
+      // console.log(fetchUsers());
+      fetchUsers();
+    });
+    setTimeout(() => {
+      console.log(users.value);
+    }, 3000);
+    console.log(users.value);
+
+    return { users };
   },
 };
 </script>
