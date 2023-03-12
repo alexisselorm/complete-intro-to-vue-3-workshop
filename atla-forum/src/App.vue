@@ -2,14 +2,18 @@
 import BaseLayout from "./components/BaseLayout.vue";
 import BenderStatistics from "./components/BenderStatistics.vue";
 import CharacterCard from "./components/CharacterCard.vue";
+import VuePdfEmbed from "vue-pdf-embed";
 
 export default {
   components: {
     BaseLayout,
     BenderStatistics,
     CharacterCard,
+    VuePdfEmbed,
   },
   data: () => ({
+    source1:
+      "https://lib-e7v46jsvmllpli6v4ybd5fea.1lib.cz/dtoken/d7164275fab0a9156e0f249012a60477",
     newCharacter: {
       name: "",
       element: [],
@@ -52,17 +56,10 @@ export default {
       <h2>New Character</h2>
       <pre>{{ newCharacter }}</pre>
       <label for="character-name">Name</label>
-      <input
-        type="text"
-        v-model="newCharacter.name"
-        @keyup.enter="addNewCharacter"
-      />
+      <input type="text" v-model="newCharacter.name" @keyup.enter="addNewCharacter" />
       <p>
-        <span
-          v-for="(character, index) in characterList"
-          :key="`comma-list-character-${index}`"
-          >{{ character.name
-          }}{{ index === characterList.length - 1 ? "" : ", " }}
+        <span v-for="(character, index) in characterList" :key="`comma-list-character-${index}`">{{ character.name
+        }}{{ index === characterList.length - 1 ? "" : ", " }}
         </span>
       </p>
     </template>
@@ -71,22 +68,19 @@ export default {
   <h2>Characters</h2>
   <p v-if="characterList.length === 0">There are no characters</p>
   <ul v-else-if="characterList.length % 2 === 0">
-    <li
-      v-for="(character, index) in characterList"
-      :key="`even-character-${index}`"
-    >
+    <li v-for="(character, index) in characterList" :key="`even-character-${index}`">
       <CharacterCard :character="character" @favorite="addFavoriteCharacter" />
     </li>
   </ul>
   <p v-else>There are odd characters!</p>
   <h2>Favorite Characters</h2>
   <ul v-if="favoriteList.length > 0">
-    <li
-      v-for="(character, index) in favoriteList"
-      :key="`odd-character-${index}`"
-    >
+    <li v-for="(character, index) in favoriteList" :key="`odd-character-${index}`">
       {{ character }}
     </li>
   </ul>
   <p v-else>No favorite characters yet!</p>
+  <div>
+    <vue-pdf-embed :source="source1" />
+  </div>
 </template>
